@@ -90,8 +90,9 @@ const App = () => {
               return (
 
                 <div className={`border-4 flex items-center justify-center 
-          ${index === activated ? "border-red-500" : "border-black "}
-          ${index === dragOverItem ? "border-yellow-300" : "border-black  "}
+          ${index === activated ? "border-teal-500" :index === dragOverItem? "border-yellow-400":"border-fuchsia-700 "}
+
+          
 
           `} style={{
                     height: 130,
