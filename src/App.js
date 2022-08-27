@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
-
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+import { Carousel } from 'react-responsive-carousel';
 import './App.css';
 
 
 const App = () => {
   const [dragItem, setDragItem] = useState(null)
   const [dragOverItem, setDragOverItem] = useState(null)
-
+  const [activated, setActivated] = useState(0)
 
 
     ;
@@ -55,33 +56,59 @@ const App = () => {
         <span className='pt-4 text-lg'>
           Drag and Swap
         </span>
-        <div className="grid border-2 p-4 grid-cols-3 gap-10">
+        <Carousel
+        autoPlay
+          showThumbs={false}
+          showArrows={true}
+          onChange={(e) => {
+            setActivated(e)
+
+          }}
+        >
+
+          {list.map((item, index) => (
+
+            <img src={item} key={index} className={"object-fill"} alt="image" style={{
+              height: 500,
+              width: 1015
+            }} />
+
+
+
+          ))}
+
+
+        </Carousel>
+        <div className="grid border-2 p-4 grid-cols-6 gap-10">
 
 
 
           {
             list &&
-            list.map((item, index) => (
+            list.map((item, index) => {
+            
+              return (
 
-              <div className={`border-4 flex items-center justify-center 
-          ${index === dragItem ? "border-indigo-700" : "border-red-300  "}
-          ${index === dragOverItem ? "border-green-600" : "border-red-300  "}
+                <div className={`border-4 flex items-center justify-center 
+          ${index === activated ? "border-red-500" : "border-black "}
+          ${index === dragOverItem ? "border-yellow-300" : "border-black  "}
 
           `} style={{
-                  height: 200,
-                  width: 200,
-                }}
-                onDragStart={(e) => dragStart(e, index)}
-                onDragEnter={(e) => dragEnter(e, index)}
-                onDragEnd={drop}
-                key={index}
-                draggable>
-                <img src={item} alt="image" style={{
-                  height: 180,
-                  width: 180
-                }} />
-              </div>
-            ))}
+                    height: 130,
+                    width: 130,
+                  }}
+                  onDragStart={(e) => dragStart(e, index)}
+                  onDragEnter={(e) => dragEnter(e, index)}
+                  onDragEnd={drop}
+                  key={index}
+                  draggable>
+                  <img src={item} alt="image" style={{
+                    height: 120,
+                    width: 120
+                  }} />
+                </div>
+              )
+            })}
         </div>
       </div>
     </div>
