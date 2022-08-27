@@ -57,7 +57,7 @@ const App = () => {
           Drag and Swap
         </span>
         <Carousel
-        autoPlay
+        autoPlay 
           showThumbs={false}
           showArrows={true}
           onChange={(e) => {
